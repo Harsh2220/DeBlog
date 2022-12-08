@@ -1,10 +1,9 @@
 import type { NextPage } from 'next'
-import { Heading } from '@chakra-ui/react'
-import Hero from '../components/Hero'
+import Login from './login'
 
 const Home: NextPage = () => {
   return (
-    <Hero />
+    <Login />
   )
 }
 
