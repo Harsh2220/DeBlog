@@ -174,41 +174,53 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
       justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}>
-      <IconButton
+      <HStack spacing={4}
         display={{ base: 'flex', md: 'none' }}
-        onClick={onOpen}
-        variant="outline"
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
+      >
+        <IconButton
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          icon={<FiMenu />}
+        />
+        <Text
+          fontSize="2xl"
+          fontFamily="monospace"
+          fontWeight="bold">
+          Logo
+        </Text>
+      </HStack>
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
 
-      <Flex w='full' justifyContent='center'>
+      <Flex w='full' justifyContent='center' display={['none', 'none', 'flex']}>
         <Box>
           <InputGroup>
-            <Input placeholder='Search' bg={useColorModeValue('gray.100', 'gray.800')} w='xs' />
+            <Input placeholder='Search' bg={useColorModeValue('gray.100', 'gray.800')} maxW='sm' />
             <InputRightElement children={<BiSearch fontSize={'24px'} />} />
           </InputGroup>
         </Box>
       </Flex>
 
-      <HStack spacing={{ base: '0', md: '6' }}>
+      <HStack spacing={{ base: 0, md: 4 }}>
+        <IconButton
+          size="lg"
+          variant="ghost"
+          aria-label="open menu"
+          icon={<BiSearch />}
+        />
         <IconButton
           size="lg"
           variant="ghost"
           aria-label="open menu"
           icon={<FiBell />}
         />
-        <Button onClick={toggleColorMode}>
-          {colorMode === 'light' ? <BiMoon /> : <BsSun />}
-        </Button>
+        <IconButton
+          onClick={toggleColorMode}
+          size="lg"
+          variant="ghost"
+          aria-label="open menu"
+          icon={colorMode === 'light' ? <BiMoon /> : <BsSun />}
+        />
       </HStack>
     </Flex>
   );
