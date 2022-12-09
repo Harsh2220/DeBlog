@@ -13,6 +13,7 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
+  Image,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -82,8 +83,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       pos="fixed"
       h="3xl"
       {...rest}>
-      <Flex h="20" alignItems="center"mr={12} justifyContent="flex-start" textColor={'white'}>
-        <img src="./logo-white.png" alt="" />
+      <Flex h="20" alignItems="center" mr={12} justifyContent="flex-start" textColor={'white'}>
+        <Image src="./logo-white.png" alt="" />
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
