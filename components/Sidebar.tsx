@@ -35,6 +35,7 @@ import { BiMoon } from 'react-icons/bi';
 import { BsSun } from 'react-icons/bs';
 import { BiSearch } from 'react-icons/bi'
 import connectWallet from '../utils/connectWallet';
+import BlogCard from './BlogCard';
 
 interface LinkItemProps {
   name: string;
@@ -71,7 +72,9 @@ export default function Sidebar() {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        Hello
+        <BlogCard />
+        <BlogCard />
+        <BlogCard />
       </Box>
     </Box>
   );
