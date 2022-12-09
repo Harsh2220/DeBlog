@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import {
   IconButton,
-  Avatar,
   Box,
   CloseButton,
   Flex,
@@ -15,12 +14,11 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
-  Button,
   useColorMode,
   Input,
   InputGroup,
-  InputLeftElement,
   InputRightElement,
+  Button,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -30,14 +28,13 @@ import {
   FiSettings,
   FiMenu,
   FiBell,
-  FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import { BiMoon } from 'react-icons/bi';
 import { BsSun } from 'react-icons/bs';
-import WalletModal from './WalletModal';
 import { BiSearch } from 'react-icons/bi'
+import connectWallet from '../utils/connectWallet';
 
 interface LinkItemProps {
   name: string;
@@ -51,11 +48,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Settings', icon: FiSettings },
 ];
 
-export default function Sidebar({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function Sidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -78,7 +71,7 @@ export default function Sidebar({
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {children}
+        Hello
       </Box>
     </Box>
   );
@@ -103,7 +96,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       <Box>
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-            Logo
+            DeBlog
           </Text>
           <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
         </Flex>
@@ -114,7 +107,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         ))}
       </Box>
       <Box p={4}>
-        <WalletModal />
+        <Button onClick={connectWallet} w='full'>
+          Connect Wallet
+        </Button>
       </Box>
     </Flex>
   );
