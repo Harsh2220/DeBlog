@@ -49,7 +49,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Settings', icon: FiSettings },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ blogs }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
@@ -72,9 +72,9 @@ export default function Sidebar() {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
+        {blogs.map((blog,i)=>{
+          return <BlogCard author={blog.authorName} title={blog.blogTitle}/>
+        })}
       </Box>
     </Box>
   );
