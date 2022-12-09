@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
 import {
   IconButton,
+  Avatar,
   Box,
   CloseButton,
   Flex,
+  HStack,
   Icon,
   useColorModeValue,
   Link,
@@ -13,7 +15,12 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
-  Image,
+  Button,
+  useColorMode,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
 } from '@chakra-ui/react';
 import {
   FiHome,
@@ -22,31 +29,39 @@ import {
   FiStar,
   FiSettings,
   FiMenu,
+  FiBell,
+  FiChevronDown,
 } from 'react-icons/fi';
-import { MdOutlineSpaceDashboard, MdNotificationsActive } from "react-icons/md";
-import { TbBookmarks } from "react-icons/tb"
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import { BiMoon } from 'react-icons/bi';
+import { BsSun } from 'react-icons/bs';
+import WalletModal from './WalletModal';
+import { BiSearch } from 'react-icons/bi'
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Dashboard', icon: MdOutlineSpaceDashboard },
+  { name: 'Home', icon: FiHome },
   { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Bookmarks', icon: TbBookmarks },
-  { name: 'Notifications', icon: MdNotificationsActive },
+  { name: 'Explore', icon: FiCompass },
+  { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
 ];
 
-export default function Sidebar({ children }: { children: ReactNode }) {
+export default function Sidebar({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
         onClose={() => onClose}
-        display={{ base: 'none', md: 'block' }}
+        display={{ base: 'none', md: 'flex' }}
       />
       <Drawer
         autoFocus={false}
@@ -61,7 +76,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
-      <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
+      <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {children}
       </Box>
@@ -75,29 +90,33 @@ interface SidebarProps extends BoxProps {
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   return (
-    <Box
-      bg={'#1a1d1f'}
+    <Flex
+      bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"
-      borderRadius={[0, 10]}
-      marginTop={[0, 4]}
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
-      h={["full", "3xl"]}
-      width={["xs"]}
+      h="full"
+      flexDirection={'column'}
+      justifyContent='space-between'
       {...rest}>
-      <Flex h="20" alignItems="center" mr={[4, 12]} justifyContent="space-between" textColor={'#919297'}>
-        <Box w={36}>
-          <Image src="./logo-white.png" alt="" />
-        </Box>
-        <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-      </Flex>
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
-    </Box>
+      <Box>
+        <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+          <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            Logo
+          </Text>
+          <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
+        </Flex>
+        {LinkItems.map((link) => (
+          <NavItem key={link.name} icon={link.icon}>
+            {link.name}
+          </NavItem>
+        ))}
+      </Box>
+      <Box p={4}>
+        <WalletModal />
+      </Box>
+    </Flex>
   );
 };
 
@@ -105,9 +124,10 @@ interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
 }
+
 const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} textColor={'white'}>
+    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
         align="center"
         p="4"
@@ -116,7 +136,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: '#2e3334',
+          bg: 'cyan.400',
           color: 'white',
         }}
         {...rest}>
@@ -139,24 +159,57 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
+
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
+      px={{ base: 4, md: 4 }}
       height="20"
       alignItems="center"
       bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-      justifyContent="space-between"
+      justifyContent={{ base: 'space-between', md: 'flex-end' }}
       {...rest}>
       <IconButton
-        variant="outline"
+        display={{ base: 'flex', md: 'none' }}
         onClick={onOpen}
+        variant="outline"
         aria-label="open menu"
         icon={<FiMenu />}
       />
+
+      <Text
+        display={{ base: 'flex', md: 'none' }}
+        fontSize="2xl"
+        fontFamily="monospace"
+        fontWeight="bold">
+        Logo
+      </Text>
+
+      <Flex w='full' justifyContent='center'>
+        <Box>
+          <InputGroup>
+            <Input placeholder='Search' bg={useColorModeValue('gray.100', 'gray.800')} w='xs' />
+            <InputRightElement children={<BiSearch fontSize={'24px'} />} />
+          </InputGroup>
+        </Box>
+      </Flex>
+
+      <HStack spacing={{ base: '0', md: '6' }}>
+        <IconButton
+          size="lg"
+          variant="ghost"
+          aria-label="open menu"
+          icon={<FiBell />}
+        />
+        <Button onClick={toggleColorMode}>
+          {colorMode === 'light' ? <BiMoon /> : <BsSun />}
+        </Button>
+      </HStack>
     </Flex>
   );
 };

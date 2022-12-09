@@ -40,7 +40,7 @@ export default function WalletModal() {
 
     return (
         <>
-            <Button onClick={onOpen}>Connect Wallet</Button>
+            <Button onClick={onOpen} w='full'>Connect Wallet</Button>
 
             <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
