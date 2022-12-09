@@ -202,6 +202,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           variant="ghost"
           aria-label="open menu"
           icon={<BiSearch />}
+          display={['flex', 'flex', 'none']}
         />
         <IconButton
           size="lg"
