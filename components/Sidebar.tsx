@@ -23,6 +23,8 @@ import {
   FiSettings,
   FiMenu,
 } from 'react-icons/fi';
+import { MdOutlineSpaceDashboard, MdNotificationsActive } from "react-icons/md";
+import { TbBookmarks } from "react-icons/tb"
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 
@@ -31,10 +33,10 @@ interface LinkItemProps {
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Dashboard', icon: FiHome },
+  { name: 'Dashboard', icon: MdOutlineSpaceDashboard },
   { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Bookmarks', icon: FiCompass },
-  { name: 'Notifications', icon: FiStar },
+  { name: 'Bookmarks', icon: TbBookmarks },
+  { name: 'Notifications', icon: MdNotificationsActive },
   { name: 'Settings', icon: FiSettings },
 ];
 
@@ -76,15 +78,18 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     <Box
       bg={'#1a1d1f'}
       borderRight="1px"
-      borderRadius={10}
-      marginTop={4}
+      borderRadius={[0, 10]}
+      marginTop={[0, 4]}
       borderRightColor={useColorModeValue('gray.200', 'gray.700')}
       w={{ base: 'full', md: 60 }}
       pos="fixed"
-      h="3xl"
+      h={["full", "3xl"]}
+      width={["xs"]}
       {...rest}>
-      <Flex h="20" alignItems="center" mr={12} justifyContent="flex-start" textColor={'white'}>
-        <Image src="./logo-white.png" alt="" />
+      <Flex h="20" alignItems="center" mr={[4, 12]} justifyContent="space-between" textColor={'#919297'}>
+        <Box w={36}>
+          <Image src="./logo-white.png" alt="" />
+        </Box>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -144,7 +149,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-      justifyContent="flex-start"
+      justifyContent="space-between"
       {...rest}>
       <IconButton
         variant="outline"
@@ -152,10 +157,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-      <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
-        Logo
-      </Text>
     </Flex>
   );
 };
