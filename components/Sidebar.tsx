@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import {
   IconButton,
   Box,
@@ -38,6 +38,8 @@ import { BiSearch } from "react-icons/bi";
 import connectWallet from "../utils/connectWallet";
 import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";
+import shortenAddress from "../utils/shortenAddress";
+import formatBalance from "../utils/formatBalance";
 
 interface LinkItemProps {
   name: string;
@@ -101,20 +103,6 @@ export default function Sidebar({ blogs }) {
             <BlogSkleton />
           </>
         )}
-        {/* {blogs &&
-          blogs.map((blog, index) => {
-            return (
-              <>
-                <BlogCard
-                  key={index}
-                  author={blog.authorName}
-                  title={blog.blogTitle}
-                  image={blog.coverImage}
-                />
-                <Divider />
-              </>
-            );
-          })} */}
       </Box>
     </Box>
   );
@@ -125,6 +113,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const [address, setAddress] = useState<string | undefined>("");
+  const [balance, setBalance] = useState<number | undefined>(0);
   return (
     <Flex
       bg={useColorModeValue("white", "gray.900")}
@@ -154,9 +144,23 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         ))}
       </Box>
       <Box p={4}>
-        <Button onClick={connectWallet} w="full">
-          Connect Wallet
-        </Button>
+        {address?.length > 0 ? (
+          <Box bg={useColorModeValue("white", "gray.700")} p={4}>
+            <Box w={"full"}>{shortenAddress(address)}</Box>
+            <Box w={"full"}>{formatBalance(balance)}</Box>
+          </Box>
+        ) : (
+          <Button
+            onClick={async () => {
+              const data = await connectWallet();
+              setAddress(data?.address);
+              setBalance(data?.balance);
+            }}
+            w="full"
+          >
+            Connect Wallet
+          </Button>
+        )}
       </Box>
     </Flex>
   );
