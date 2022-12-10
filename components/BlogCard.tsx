@@ -19,7 +19,7 @@ const BlogCard = ({ title, author, image }: BlogCardProps) => {
   return (
     <Box
       w={"4xl"}
-      bg={useColorModeValue("gray.100", "gray.800")}
+      bg={useColorModeValue("white", "gray.800")}
       p={4}
       borderColor={"gray"}
     >
