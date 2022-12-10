@@ -2,71 +2,57 @@
 pragma solidity ^0.8.9;
 
 contract DeBlog {
+    
     event BlogAdded(
         uint256 blogId,
         address owner,
-        string blogTitle,
-        string subTitle,
-        string authorName,
-        string blogContent,
-        uint blogUploaded,
-        string coverImage
+        string metadata,
+        uint256 timestamp
     );
+
+    /**
+     * Blog metadata will contain:
+     * Title:
+     * Subtitle:
+     * Blog date:
+     * Author Name:
+     * Cover Image:
+     * Original Blog Content:
+     */
 
     struct Blog {
         uint256 blogId;
         address blogOwner;
-        string blogTitle;
-        string subTitle;
-        string authorName;
-        string blogContent;
+        string metadata;
         uint256 timestamp;
-        string coverImage;
-    }
-
-    address payable owner;
-
-    constructor() {
-        owner = payable(msg.sender);
     }
 
     Blog[] blogs;
+
+    struct Likes {
+        address[] likers;
+    }
+
+    mapping(uint256 => Likes) blogToLikes;
+
+    function getLikes(uint256 blogId_) public view returns (Likes memory) {
+        return blogToLikes[blogId_];
+    }
+
+    function addLike(uint256 blogId_) public {
+        blogToLikes[blogId_].likers.push(msg.sender);
+    }
 
     function getAllblogs() public view returns (Blog[] memory) {
         return blogs;
     }
 
-    function newBlog(
-        uint256 blogId_,
-        string memory blogTitle_,
-        string memory subTitle_,
-        string memory authorName_,
-        string memory blogContent_,
-        string memory coverImage_
-    ) public payable {
+    function newBlog(string memory metadata_) public payable {
         blogs.push(
-            Blog(
-                blogId_,
-                payable(msg.sender),
-                blogTitle_,
-                subTitle_,
-                authorName_,
-                blogContent_,
-                block.timestamp,
-                coverImage_
-            )
+            Blog(blogs.length, payable(msg.sender), metadata_, block.timestamp)
         );
 
-        emit BlogAdded(
-            blogId_,
-            msg.sender,
-            blogTitle_,
-            subTitle_,
-            authorName_,
-            blogContent_,
-            block.timestamp,
-            coverImage_
-        );
+        emit BlogAdded(blogs.length, msg.sender, metadata_, block.timestamp);
     }
 
     function tipToOwner(address payable blogOwner_) public payable {
