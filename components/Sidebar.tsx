@@ -35,6 +35,7 @@ import { ReactText } from "react";
 import { BiMoon } from "react-icons/bi";
 import { BsSun } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
+import {HiPencilAlt} from "react-icons/hi"
 import connectWallet from "../utils/connectWallet";
 import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";
@@ -55,7 +56,6 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function Sidebar({ blogs }) {
-  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
@@ -215,6 +215,7 @@ interface MobileProps extends FlexProps {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const router = useRouter();
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -255,6 +256,16 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           </InputGroup>
         </Box>
       </Flex>
+      <Button
+            onClick={()=>router.push('write')}
+            w={'fit-content'}
+            paddingInline={8}
+            fontSize={'lg'}
+            // fontWeight={'normal'}
+            leftIcon={<HiPencilAlt />}
+          >
+            Write
+          </Button>
 
       <HStack spacing={{ base: 0, md: 4 }}>
         <IconButton
