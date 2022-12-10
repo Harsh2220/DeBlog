@@ -11,8 +11,10 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineRead } from "react-icons/ai";
+import useStore from "../store/store";
 
 type blogPageProps = {
   title: string;
@@ -21,6 +23,13 @@ type blogPageProps = {
 };
 
 const blogPage = ({ title, author, image }: blogPageProps) => {
+  const state = useStore();
+  const router = useRouter();
+  const blogs = state.blogs;
+  const { id } = router.query;
+  const currentBlog = blogs[id];
+  console.log(currentBlog)
+
   return (
     <>
       <HStack

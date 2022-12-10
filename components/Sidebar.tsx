@@ -40,7 +40,7 @@ import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";
 import shortenAddress from "../utils/shortenAddress";
 import formatBalance from "../utils/formatBalance";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 interface LinkItemProps {
   name: string;
@@ -55,6 +55,7 @@ const LinkItems: Array<LinkItemProps> = [
 ];
 
 export default function Sidebar({ blogs }) {
+  const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>

@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import { ethers } from "ethers";
 import { CONTRACT_ADDRESS, ABI } from "../utils/utils";
+import useStore from '../store/store';
 const Home: NextPage = () => {
+  const state = useStore();
+  const setBlogs = state.setBlogs;
   const [detailBlogs, setDetailBlogs] = useState('');
 
   useEffect(() => {
@@ -25,6 +28,7 @@ const Home: NextPage = () => {
           console.log(AllBlogs);
 
           setDetailBlogs(AllBlogs);
+          setBlogs(AllBlogs);
         }
       }
     } catch (error) {
