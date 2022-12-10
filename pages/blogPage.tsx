@@ -54,7 +54,7 @@ const blogPage = ({ title, author, image }: blogPageProps) => {
                   outlineOffset={"2px"}
                 />
                 <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-                  {author}
+                  Sahil Kakwani
                 </Text>
               </HStack>
               <Flex opacity={0.6}>

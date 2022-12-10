@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineRead } from "react-icons/ai";
 import React from "react";
+import { useRouter } from "next/router";
 
 type BlogCardProps = {
   title: string;
@@ -17,13 +18,15 @@ type BlogCardProps = {
   image: string;
 };
 
-const BlogCard = ({ title, author, image }: BlogCardProps) => {
+const BlogCard = ({ title, author, image, index }: BlogCardProps) => {
+  const router = useRouter();
   return (
     <Box
       maxW={["96", "3xl"]}
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       borderColor={"gray"}
+      onClick={()=>{router.push(`/blog/${index}`)}}
     >
       <Stack>
         <HStack border={"1px solid linear(to-r, green.200, pink.500)"}>

@@ -40,6 +40,7 @@ import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";
 import shortenAddress from "../utils/shortenAddress";
 import formatBalance from "../utils/formatBalance";
+import { Router } from "next/router";
 
 interface LinkItemProps {
   name: string;
@@ -86,6 +87,7 @@ export default function Sidebar({ blogs }) {
                   author={blog.authorName}
                   title={blog.blogTitle}
                   image={blog.coverImage}
+                  index={index}
                 />
                 <Divider />
               </>
