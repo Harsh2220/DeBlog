@@ -72,8 +72,8 @@ export default function Sidebar({ blogs }) {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
-        {blogs.map((blog,i)=>{
-          return <BlogCard author={blog.authorName} title={blog.blogTitle}/>
+        {blogs && blogs.map((blog,i)=>{
+          return <BlogCard author={blog.authorName} title={blog.blogTitle} image={blog.coverImage}/>
         })}
       </Box>
     </Box>
