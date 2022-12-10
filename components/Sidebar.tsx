@@ -37,6 +37,7 @@ import { BsSun } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import connectWallet from "../utils/connectWallet";
 import BlogCard from "./BlogCard";
+import BlogSkleton from "./BlogSkleton";
 
 interface LinkItemProps {
   name: string;
@@ -74,7 +75,7 @@ export default function Sidebar({ blogs }) {
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
-        {blogs &&
+        {blogs ? (
           blogs.map((blog, index) => {
             return (
               <>
@@ -87,7 +88,33 @@ export default function Sidebar({ blogs }) {
                 <Divider />
               </>
             );
-          })}
+          })
+        ) : (
+          <>
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+            <BlogSkleton />
+          </>
+        )}
+        {/* {blogs &&
+          blogs.map((blog, index) => {
+            return (
+              <>
+                <BlogCard
+                  key={index}
+                  author={blog.authorName}
+                  title={blog.blogTitle}
+                  image={blog.coverImage}
+                />
+                <Divider />
+              </>
+            );
+          })} */}
       </Box>
     </Box>
   );
