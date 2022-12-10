@@ -1,6 +1,5 @@
 const connectWallet = async () => {
   try {
-    console.log("connect");
     const { ethereum }: any = window;
     if (!ethereum) {
       alert("Please Install Metamask");
@@ -9,6 +8,7 @@ const connectWallet = async () => {
         method: "eth_requestAccounts",
       });
       console.log(getAccount[0]);
+      return getAccount[0]
     }
   } catch (err) {
     console.log(err);

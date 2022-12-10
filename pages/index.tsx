@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import { ethers } from "ethers";
 import { CONTRACT_ADDRESS, ABI } from "../utils/utils";
-
 const Home: NextPage = () => {
   const [detailBlogs, setDetailBlogs] = useState('');
 
@@ -11,7 +10,6 @@ const Home: NextPage = () => {
     getAllBlogs()
 },[detailBlogs])
   const getAllBlogs = async () => {
-    
     try {
         const { ethereum } = window;
         if (!detailBlogs){
