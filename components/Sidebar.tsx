@@ -73,7 +73,7 @@ export default function Sidebar({ blogs }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4" w='fit-content'>
+      <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
         {blogs &&
           blogs.map((blog, index) => {
             return (
@@ -206,7 +206,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           icon={<FiMenu />}
         />
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          DeBlog
         </Text>
       </HStack>
       <Flex w="full" justifyContent="center" display={["none", "none", "flex"]}>

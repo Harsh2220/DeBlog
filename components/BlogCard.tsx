@@ -5,6 +5,8 @@ import {
   Text,
   Image,
   useColorModeValue,
+  Avatar,
+  HStack,
 } from "@chakra-ui/react";
 import { AiOutlineRead } from "react-icons/ai";
 import React from "react";
@@ -18,22 +20,31 @@ type BlogCardProps = {
 const BlogCard = ({ title, author, image }: BlogCardProps) => {
   return (
     <Box
-      w={"4xl"}
+      maxW={["96", "3xl"]}
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       borderColor={"gray"}
     >
       <Stack>
-        <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-          {author}
-        </Text>
+        <HStack border={"1px solid linear(to-r, green.200, pink.500)"}>
+          <Avatar
+            size={"sm"}
+            src="https://i.pravatar.cc/300"
+                      outline={"2px solid pink"}
+                      outlineColor={useColorModeValue("purple","pink")}
+            outlineOffset={"2px"}
+          />
+          <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
+            {author}
+          </Text>
+        </HStack>
         <Flex opacity={0.6}>
           <Text>cathalmacdonnacha.com</Text>
           <Text ml={4}>Dec 6, 2022</Text>
         </Flex>
       </Stack>
-      <Flex mt={2}>
-        <Stack pr={2}>
+      <Flex mt={2} flexDirection={["column", "column", "column", "row"]}>
+        <Stack pr={2} py={[1]}>
           <Text fontSize={"2xl"} fontWeight={700}>
             {title}
           </Text>
@@ -43,13 +54,13 @@ const BlogCard = ({ title, author, image }: BlogCardProps) => {
               7 min read
             </Text>
           </Flex>
-          <Text>
+          <Text textAlign={"justify"}>
             One of the less exciting things about being a Frontend Developer is
             having to handle error, empty and loading states. It may not be the
             most fun thing to do, but it's necessary in order to give your u…
           </Text>
         </Stack>
-        <Box w={"3xl"} height={40}>
+        <Box w={["auto", "3xl"]} height={"44"}>
           <Image src={image} borderRadius={10} height={"100%"} width={"100%"} />
         </Box>
       </Flex>
