@@ -18,14 +18,10 @@ type BlogCardProps = {
 const BlogCard = ({ title, author, image }: BlogCardProps) => {
   return (
     <Box
-      w={"3xl"}
+      w={"4xl"}
       bg={useColorModeValue("gray.100", "gray.800")}
       p={4}
-      border={"0.1px solid"}
       borderColor={"gray"}
-          my={4}
-          boxShadow={"0px 0px 3px 1px black"}
-      mx={"auto"}
     >
       <Stack>
         <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>

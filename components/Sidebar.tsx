@@ -19,6 +19,7 @@ import {
   InputGroup,
   InputRightElement,
   Button,
+  Divider,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -72,15 +73,19 @@ export default function Sidebar({ blogs }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
+      <Box ml={{ base: 0, md: 60 }} p="4" w='fit-content'>
         {blogs &&
-          blogs.map((blog, i) => {
+          blogs.map((blog, index) => {
             return (
-              <BlogCard
-                author={blog.authorName}
-                title={blog.blogTitle}
-                image={blog.coverImage}
-              />
+              <>
+                <BlogCard
+                  key={index}
+                  author={blog.authorName}
+                  title={blog.blogTitle}
+                  image={blog.coverImage}
+                />
+                <Divider />
+              </>
             );
           })}
       </Box>

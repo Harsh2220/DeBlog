@@ -8,29 +8,29 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getAllBlogs()
-},[detailBlogs])
+  }, [detailBlogs])
   const getAllBlogs = async () => {
     try {
-        const { ethereum } = window;
-        if (!detailBlogs){
-            if (ethereum) {
-                const provider = new ethers.providers.Web3Provider(ethereum, "any");
-                const signer = provider.getSigner();
-                const DeBlog = new ethers.Contract(
-                    CONTRACT_ADDRESS,
-                    ABI,
-                    signer
-                );
-                const AllBlogs = await DeBlog.getAllblogs();
-                console.log(AllBlogs);
-                
-                setDetailBlogs(AllBlogs);
-            }
+      const { ethereum } = window;
+      if (!detailBlogs) {
+        if (ethereum) {
+          const provider = new ethers.providers.Web3Provider(ethereum, "any");
+          const signer = provider.getSigner();
+          const DeBlog = new ethers.Contract(
+            CONTRACT_ADDRESS,
+            ABI,
+            signer
+          );
+          const AllBlogs = await DeBlog.getAllblogs();
+          console.log(AllBlogs);
+
+          setDetailBlogs(AllBlogs);
         }
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  }
   return (
     <Sidebar blogs={detailBlogs} />
   )
