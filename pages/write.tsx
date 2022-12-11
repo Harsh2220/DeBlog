@@ -6,17 +6,31 @@ import {
   Flex,
   Divider,
   Textarea,
+  HStack,
+  Text,
+  Button
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import ImageUpload from "../components/ImageUpload";
+import remarkGfm from 'remark-gfm'
+import Navbar from "../components/Navbar";
 
 type Props = {};
 
 const write = (props: Props) => {
   const [markdown, setMarkdown] = useState<string>("");
   return (
-    <Container maxW={"container.md"}>
+    // <Container w={'100%'}>
+      <Container maxW={"container.md"}>
+        <HStack w={'full'} justifyContent={'space-between'} p={8}>
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+            DeBlog
+          </Text>
+          <Button>
+            Publish
+          </Button>
+        </HStack>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
@@ -51,8 +65,9 @@ const write = (props: Props) => {
           fontSize={"1.3rem"}
         />
       </Box>
-      <ReactMarkdown children={markdown} />
+      <ReactMarkdown remarkPlugins={[remarkGfm]} >{markdown}</ReactMarkdown>
     </Container>
+    // </Container>
   );
 };
 

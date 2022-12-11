@@ -42,6 +42,7 @@ import BlogSkleton from "./BlogSkleton";
 import shortenAddress from "../utils/shortenAddress";
 import formatBalance from "../utils/formatBalance";
 import { useRouter } from "next/router";
+import Navbar from "./Navbar";
 
 interface LinkItemProps {
   name: string;
@@ -76,8 +77,9 @@ export default function Sidebar({ blogs }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
+      <Navbar />
       {/* mobilenav */}
-      <MobileNav onOpen={onOpen} />
+      {/* <MobileNav onOpen={onOpen} /> */}
       <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
         {blogs ? (
           blogs.map((blog, index) => {
@@ -210,85 +212,6 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   );
 };
 
-interface MobileProps extends FlexProps {
-  onOpen: () => void;
-}
 
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const router = useRouter();
-  const { colorMode, toggleColorMode } = useColorMode();
 
-  return (
-    <Flex
-      ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 4 }}
-      height="20"
-      alignItems="center"
-      bg={useColorModeValue("white", "gray.900")}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      justifyContent={{ base: "space-between", md: "flex-end" }}
-      pos={"sticky"}
-      top={0}
-      zIndex={2}
-      {...rest}
-    >
-      <HStack spacing={4} display={{ base: "flex", md: "none" }}>
-        <IconButton
-          onClick={onOpen}
-          variant="outline"
-          aria-label="open menu"
-          icon={<FiMenu />}
-        />
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          DeBlog
-        </Text>
-      </HStack>
-      <Flex w="full" justifyContent="center" display={["none", "none", "flex"]}>
-        <Box>
-          <InputGroup>
-            <Input
-              placeholder="Search"
-              bg={useColorModeValue("gray.100", "gray.800")}
-              maxW="sm"
-            />
-            <InputRightElement children={<BiSearch fontSize={"24px"} />} />
-          </InputGroup>
-        </Box>
-      </Flex>
-      <Button
-            onClick={()=>router.push('write')}
-            w={'fit-content'}
-            paddingInline={8}
-            fontSize={'lg'}
-            // fontWeight={'normal'}
-            leftIcon={<HiPencilAlt />}
-          >
-            Write
-          </Button>
 
-      <HStack spacing={{ base: 0, md: 4 }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<BiSearch />}
-          display={["flex", "flex", "none"]}
-        />
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
-        <IconButton
-          onClick={toggleColorMode}
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={colorMode === "light" ? <BiMoon /> : <BsSun />}
-        />
-      </HStack>
-    </Flex>
-  );
-};
