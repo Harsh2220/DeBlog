@@ -75,6 +75,7 @@ const write = (props: Props) => {
           }}
           placeholder="Write something"
           fontSize={"1.3rem"}
+          value={markdown}
         />)
         }
       </Box>
