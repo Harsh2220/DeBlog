@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { AiOutlineRead } from "react-icons/ai";
 import useStore from "../../store/Store";
+import readingTime from "../../utils/getReadingTime";
 
 type blogPageProps = {
   title: string;
@@ -24,11 +25,12 @@ type blogPageProps = {
 const blogPage = ({ title, author, image }: blogPageProps) => {
   const state = useStore();
   const router = useRouter();
+  //@ts-ignore
   const blogs = state.blogs;
   console.log(blogs);
   const { id } = router.query;
   const currentBlog = blogs[id];
-  console.log(currentBlog)
+  console.log(currentBlog);
 
   return (
     <HStack
@@ -75,7 +77,7 @@ const blogPage = ({ title, author, image }: blogPageProps) => {
               <Flex alignItems={"center"}>
                 <AiOutlineRead />{" "}
                 <Text lineHeight={0.8} ml={4} fontWeight={"500"}>
-                  7 min read
+                  {readingTime(currentBlog.blogContent)} min read
                 </Text>
               </Flex>
             </Stack>
@@ -93,9 +95,7 @@ const blogPage = ({ title, author, image }: blogPageProps) => {
                 width={"100%"}
               />
             </Box>
-            <Text textAlign={"justify"}>
-              {currentBlog.blogContent}
-            </Text>
+            <Text textAlign={"justify"}>{currentBlog.blogContent}</Text>
           </VStack>
         </Box>
       </HStack>

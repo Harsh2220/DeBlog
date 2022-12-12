@@ -1,3 +1,4 @@
+//@ts-nocheck
 import type { NextPage } from "next";
 import { useState, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
@@ -8,9 +9,7 @@ import useStore from "../store/Store";
 const Home: NextPage = () => {
   const state = useStore();
   const setBlogs = state.setBlogs;
-  const blogs = state.blogs;
   const [detailBlogs, setDetailBlogs] = useState("");
-
   const getAllBlogs = async () => {
     try {
       const { ethereum }: any = window;

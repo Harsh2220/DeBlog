@@ -91,6 +91,7 @@ export default function Sidebar({ blogs }) {
                   title={blog.blogTitle}
                   image={blog.coverImage}
                   index={index}
+                  content={blog.blogContent}
                 />
                 <Divider />
               </>
