@@ -35,7 +35,7 @@ import { ReactText } from "react";
 import { BiMoon } from "react-icons/bi";
 import { BsSun } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
-import {HiPencilAlt} from "react-icons/hi"
+import { HiPencilAlt } from "react-icons/hi"
 import connectWallet from "../utils/connectWallet";
 import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";

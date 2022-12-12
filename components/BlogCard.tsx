@@ -16,6 +16,7 @@ type BlogCardProps = {
   title: string;
   author: string;
   image: string;
+  index: number
 };
 
 const BlogCard = ({ title, author, image, index }: BlogCardProps) => {
@@ -26,15 +27,15 @@ const BlogCard = ({ title, author, image, index }: BlogCardProps) => {
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       borderColor={"gray"}
-      onClick={()=>{router.push(`/blog/${index}`)}}
+      onClick={() => { router.push(`/blog/${index}`) }}
     >
       <Stack>
         <HStack border={"1px solid linear(to-r, green.200, pink.500)"}>
           <Avatar
             size={"sm"}
             src="https://i.pravatar.cc/300"
-                      outline={"2px solid pink"}
-                      outlineColor={useColorModeValue("purple","pink")}
+            outline={"2px solid pink"}
+            outlineColor={useColorModeValue("purple", "pink")}
             outlineOffset={"2px"}
           />
           <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
