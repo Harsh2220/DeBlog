@@ -19,7 +19,7 @@ import {
     image: string;
   };
   
-  const Preview = ({ title, subTitle, content }: blogPageProps) => {
+  const Preview = ({ title, subTitle, content, banner }: blogPageProps) => {
   
     return (
       <HStack
@@ -63,18 +63,18 @@ import {
             </Stack>
             <VStack>
               <Text fontSize={"4xl"} fontWeight={700}>
-                {title}
+                {title?title:'Add Title'}
               </Text>
               <Box w={["auto", "3xl"]} height={"sm"}>
                 <Image
-                  src={'/blogImage.webp'}
+                  src={banner?URL.createObjectURL(banner):'/blogImage.webp'}
                   borderRadius={10}
                   p={"2"}
                   height={"100%"}
                   width={"100%"}
                 />
               </Box>
-              <Text textAlign={"justify"}>{content}</Text>
+              <Text textAlign={"justify"}>{content?content:'Add Blog Content'}</Text>
             </VStack>
           </Box>
         </HStack>

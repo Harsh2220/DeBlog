@@ -24,6 +24,7 @@ const write = (props: Props) => {
   const [preview, setPreview] = useState<boolean>(false);
   const [title, setTitle] = useState<String | null>(null);
   const [subTitle, setSubTitle] = useState<String | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   // const [content, setContent] = useState<String | null>(null);
   return (
     // <Container w={'100%'}>
@@ -42,7 +43,7 @@ const write = (props: Props) => {
         <Button colorScheme={"blue"}>Publish</Button>
       </Flex>
     </HStack>
-    {preview?(<Preview title={title} subTitle={subTitle} content={markdown} />): 
+    {preview?(<Preview title={title} subTitle={subTitle} content={markdown} banner={image}/>): 
     <Container maxW={"container.md"}>
       <Flex
         justifyContent={"space-between"}
@@ -79,7 +80,7 @@ const write = (props: Props) => {
             />
           </Box>
         </Stack>
-        <ImageUpload />
+        <ImageUpload image={image} setImage={setImage}/>
       </Flex>
       <Divider height={"full"} borderBottomWidth={"3px"} />
       <Box mt={8}>
@@ -90,7 +91,6 @@ const write = (props: Props) => {
             resize={"none"}
             // height={400}
             minH={"100vh"}
-            maxLength={200}
             // maxHeight={100}
             onChange={(e) => {
               setMarkdown(e.target.value);

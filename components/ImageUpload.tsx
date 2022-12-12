@@ -107,11 +107,10 @@ const PreviewImage = forwardRef<BoxProps, typeof Box>((props, ref) => {
   );
 });
 
-export default function ImageUpload() {
+export default function ImageUpload({image, setImage}) {
   const controls = useAnimation();
   const startAnimation = () => controls.start("hover");
   const stopAnimation = () => controls.stop();
-  const [image, setImage] = useState<File | null>(null);
   return (
     //   <Container my="12">
     <AspectRatio width="56" ratio={1}>
