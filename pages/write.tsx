@@ -15,82 +15,93 @@ import ReactMarkdown from "react-markdown";
 import ImageUpload from "../components/ImageUpload";
 import remarkGfm from "remark-gfm";
 import Navbar from "../components/Navbar";
+import Preview from "../components/Preview";
 
 type Props = {};
 
 const write = (props: Props) => {
   const [markdown, setMarkdown] = useState<string>("");
   const [preview, setPreview] = useState<boolean>(false);
+  const [title, setTitle] = useState<String | null>(null);
+  const [subTitle, setSubTitle] = useState<String | null>(null);
+  // const [content, setContent] = useState<String | null>(null);
   return (
     // <Container w={'100%'}>
     <Box>
-      <HStack
-        w={"full"}
+    <HStack
+      w={"full"}
+      justifyContent={"space-between"}
+      paddingInline={16}
+      paddingBlock={8}
+    >
+      <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+        DeBlog
+      </Text>
+      <Flex w={52} justifyContent={"space-between"}>
+        <Button minW={'91px'} onClick={() => setPreview((prev) => !prev)}>{preview?'Write':'Preview'}</Button>
+        <Button colorScheme={"blue"}>Publish</Button>
+      </Flex>
+    </HStack>
+    {preview?(<Preview title={title} subTitle={subTitle} content={markdown} />): 
+    <Container maxW={"container.md"}>
+      <Flex
         justifyContent={"space-between"}
-        paddingInline={16}
+        alignItems={"center"}
         paddingBlock={8}
       >
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          DeBlog
-        </Text>
-        <Flex w={52} justifyContent={"space-between"}>
-          <Button onClick={() => setPreview((prev) => !prev)}>Preview</Button>
-          <Button colorScheme={"blue"}>Publish</Button>
-        </Flex>
-      </HStack>
-      <Container maxW={"container.md"}>
-        <Flex
-          justifyContent={"space-between"}
-          alignItems={"center"}
-          paddingBlock={8}
-        >
-          <Stack w={"sm"}>
-            <Box w={"full"} marginBlock={4}>
-              <Input
-                htmlSize={4}
-                width="full"
-                placeholder="Title"
-                size={"lg"}
-              />
-            </Box>
-            <Box w={"full"} marginBlock={4}>
-              <Input
-                htmlSize={4}
-                width="full"
-                placeholder="SubTitle"
-                size={"lg"}
-              />
-            </Box>
-          </Stack>
-          <ImageUpload />
-        </Flex>
-        <Divider height={"full"} borderBottomWidth={"3px"} />
-        <Box mt={8}>
-          {preview ? (
-            <ReactMarkdown  remarkPlugins={[remarkGfm]}>
-              {markdown}
-            </ReactMarkdown>
-          ) : (
-            <Textarea
-              rows={5}
-              border={"none"}
-              _focusVisible={{ borderColor: "transparent" }}
-              resize={"none"}
-              // height={400}
-              minH={"100vh"}
-              maxLength={200}
-              // maxHeight={100}
-              onChange={(e) => {
-                setMarkdown(e.target.value);
-              }}
-              placeholder="Write something"
-              fontSize={"1.3rem"}
-              value={markdown}
+        <Stack w={"sm"}>
+          <Box w={"full"} marginBlock={4}>
+            <Input
+              htmlSize={4}
+              width="full"
+              placeholder="Title"
+              value={title}
+              size={"lg"}
+              onChange={(e)=>{
+                e.preventDefault();
+                setTitle(e.target.value)
+              }
+              }
             />
-          )}
-        </Box>
-      </Container>
-    </Box>
+          </Box>
+          <Box w={"full"} marginBlock={4}>
+            <Input
+              htmlSize={4}
+              width="full"
+              value={subTitle}
+              placeholder="SubTitle"
+              size={"lg"}
+              onChange={(e)=>{
+                e.preventDefault();
+                setSubTitle(e.target.value)
+              }
+              }
+            />
+          </Box>
+        </Stack>
+        <ImageUpload />
+      </Flex>
+      <Divider height={"full"} borderBottomWidth={"3px"} />
+      <Box mt={8}>
+          <Textarea
+            rows={5}
+            border={"none"}
+            _focusVisible={{ borderColor: "transparent" }}
+            resize={"none"}
+            // height={400}
+            minH={"100vh"}
+            maxLength={200}
+            // maxHeight={100}
+            onChange={(e) => {
+              setMarkdown(e.target.value);
+            }}
+            placeholder="Write something"
+            fontSize={"1.3rem"}
+            value={markdown}
+          />
+      </Box>
+    </Container>}
+  </Box>
     // </Container>
   );
 };
