@@ -71,16 +71,24 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
         </Flex>
         <Button
               onClick={()=>router.push('write')}
-              w={'fit-content'}
-              paddingInline={8}
+              w={['fit-content']}
+              paddingInline={[0, 8]}
               fontSize={'lg'}
-              // fontWeight={'normal'}
+              display={['none', 'block']}
               leftIcon={<HiPencilAlt />}
             >
               Write
             </Button>
   
         <HStack spacing={{ base: 0, md: 4 }}>
+        <IconButton
+            size="lg"
+            onClick={()=>router.push('write')}
+            variant="ghost"
+            aria-label="open menu"
+            icon={<HiPencilAlt />}
+            display={["flex", "none"]}
+          />
           <IconButton
             size="lg"
             variant="ghost"
@@ -93,6 +101,7 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
             variant="ghost"
             aria-label="open menu"
             icon={<FiBell />}
+            display={["none", "flex"]}
           />
           <IconButton
             onClick={toggleColorMode}

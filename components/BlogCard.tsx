@@ -25,7 +25,7 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
   const router = useRouter();
   return (
     <Box
-      maxW={["96", "3xl"]}
+      maxW={["full", "3xl"]}
       bg={useColorModeValue("white", "gray.800")}
       p={4}
       borderColor={"gray"}
@@ -35,18 +35,19 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
     >
       <Stack>
         <HStack border={"1px solid linear(to-r, green.200, pink.500)"}>
+          <Box w={'40px'}>
           <Avatar
-            size={"sm"}
+            size={'full'}
+            name={author}
             src="https://i.pravatar.cc/300"
-            outline={"2px solid pink"}
-            outlineColor={useColorModeValue("purple", "pink")}
-            outlineOffset={"2px"}
+            mr={2}
           />
+          </Box>
           <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
             {author}
           </Text>
         </HStack>
-        <Flex opacity={0.6}>
+        <Flex opacity={0.6} display={['none', 'flex', 'flex']}>
           <Text>cathalmacdonnacha.com</Text>
           <Text ml={4}>Dec 6, 2022</Text>
         </Flex>
@@ -62,14 +63,14 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
               {readingTime(content)} min read
             </Text>
           </Flex>
-          <Text textAlign={"justify"}>
+          <Text opacity={0.8}>
             One of the less exciting things about being a Frontend Developer is
             having to handle error, empty and loading states. It may not be the
             most fun thing to do, but it's necessary in order to give your u…
           </Text>
         </Stack>
-        <Box w={["auto", "3xl"]} height={"44"}>
-          <Image src={image} borderRadius={10} height={"100%"} width={"100%"} />
+        <Box w={["auto", "5xl"]} height={"48"} mt={[4, 0]}>
+          <Image src={image} borderRadius={15} height={"100%"} width={"100%"} />
         </Box>
       </Flex>
     </Box>
