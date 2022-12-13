@@ -43,6 +43,7 @@ import shortenAddress from "../utils/shortenAddress";
 import formatBalance from "../utils/formatBalance";
 import { useRouter } from "next/router";
 import Navbar from "./Navbar";
+import Trending from "./Trending";
 
 interface LinkItemProps {
   name: string;
@@ -78,8 +79,7 @@ export default function Sidebar({ blogs }) {
         </DrawerContent>
       </Drawer>
       <Navbar />
-      {/* mobilenav */}
-      {/* <MobileNav onOpen={onOpen} /> */}
+      <Flex>
       <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
         {blogs ? (
           blogs.map((blog, index) => {
@@ -110,6 +110,8 @@ export default function Sidebar({ blogs }) {
           </>
         )}
       </Box>
+      <Trending />
+      </Flex>
     </Box>
   );
 }
