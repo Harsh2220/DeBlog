@@ -16,6 +16,7 @@ import ImageUpload from "../components/ImageUpload";
 import remarkGfm from "remark-gfm";
 import Navbar from "../components/Navbar";
 import Preview from "../components/Preview";
+import BlogPage from "./blog/[id]";
 
 type Props = {};
 
@@ -43,7 +44,7 @@ const write = (props: Props) => {
         <Button colorScheme={"blue"}>Publish</Button>
       </Flex>
     </HStack>
-    {preview?(<Preview title={title} subTitle={subTitle} content={markdown} banner={image}/>): 
+    {preview?(<BlogPage title={title} subTitle={subTitle} banner={image} content={markdown}/>): 
     <Container maxW={"container.md"}>
       <Flex
         justifyContent={"space-between"}
