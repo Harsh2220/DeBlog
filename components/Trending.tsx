@@ -24,11 +24,8 @@ const Trending = (props: Props) => {
                         <Text>Founder, Helicopter Tech</Text>
                         </Stack>
                     </Flex>
-                    <Box p={2} ml={12}>
-                    <Button>View Profile</Button>
-                    </Box>
                 </Box>
-                <Box mt={4}>
+                <Box mt={8}>
                     <Flex justifyContent={'flex-start'} alignItems={'center'}>
                         <Avatar
                             size={'md'}
@@ -43,11 +40,8 @@ const Trending = (props: Props) => {
                         <Text>DevRel @GraphProtocol</Text>
                         </Stack>
                     </Flex>
-                    <Box p={2} ml={12}>
-                    <Button>View Profile</Button>
-                    </Box>
                 </Box>
-                <Box mt={4}>
+                <Box mt={8}>
                     <Flex justifyContent={'flex-start'} alignItems={'center'}>
                         <Avatar
                             size={'md'}
@@ -62,9 +56,6 @@ const Trending = (props: Props) => {
                         <Text>Founder and cheif, LensPlay</Text>
                         </Stack>
                     </Flex>
-                    <Box p={2} ml={12}>
-                    <Button>View Profile</Button>
-                    </Box>
                 </Box>
             </Box>
         </Container>

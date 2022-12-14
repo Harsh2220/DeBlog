@@ -71,13 +71,15 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
         </Flex>
         <Button
               onClick={()=>router.push('write')}
+              alignItems={'center'}
+              justifyContent={'center'}
               w={['fit-content']}
               paddingInline={[0, 8]}
               fontSize={'lg'}
-              display={['none', 'block']}
+              display={['none', 'flex']}
               leftIcon={<HiPencilAlt />}
             >
-              Write
+              <Text>Write</Text>
             </Button>
   
         <HStack spacing={{ base: 0, md: 4 }}>

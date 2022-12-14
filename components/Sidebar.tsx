@@ -194,8 +194,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
-          color: "white",
+          bg: "gray.100",
         }}
         {...rest}
       >
@@ -203,9 +202,6 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
           <Icon
             mr="4"
             fontSize="16"
-            _groupHover={{
-              color: "white",
-            }}
             as={icon}
           />
         )}

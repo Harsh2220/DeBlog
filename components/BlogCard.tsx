@@ -43,14 +43,13 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
             mr={2}
           />
           </Box>
+          <Stack lineHeight={0.8}>
           <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
             {author}
           </Text>
+          <Text ml={4}>Posted on Dec 6, 2022</Text>
+          </Stack>
         </HStack>
-        <Flex opacity={0.6} display={['none', 'flex', 'flex']}>
-          <Text>cathalmacdonnacha.com</Text>
-          <Text ml={4}>Dec 6, 2022</Text>
-        </Flex>
       </Stack>
       <Flex mt={2} flexDirection={["column", "column", "column", "row"]}>
         <Stack pr={2} py={[1]}>

@@ -15,6 +15,7 @@ import React from "react";
 import { AiOutlineRead } from "react-icons/ai";
 import useStore from "../../store/Store";
 import readingTime from "../../utils/getReadingTime";
+import ReactMarkdown from 'react-markdown'
 
 type blogPageProps = {
   title: string;
