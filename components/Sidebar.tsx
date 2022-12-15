@@ -1,6 +1,5 @@
 import React, { ReactNode, useState } from "react";
 import {
-  IconButton,
   Box,
   CloseButton,
   Flex,

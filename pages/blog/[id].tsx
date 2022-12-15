@@ -11,11 +11,20 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineRead } from "react-icons/ai";
 import useStore from "../../store/Store";
 import readingTime from "../../utils/getReadingTime";
 import ReactMarkdown from 'react-markdown'
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
+import dynamic from "next/dynamic";
+
+
+const MDPreview = dynamic(
+  () => import("@uiw/react-markdown-preview"),
+  { ssr: false }
+);
 
 type blogPageProps = {
   title: string;
@@ -33,6 +42,8 @@ const BlogPage = ({ title, subTitle, banner, content }: blogPageProps) => {
   const blogs = state.blogs;
   const { id } = router.query;
   const currentBlog = blogs[id];
+  const [first, setfirst] = useState('');
+  
   // console.log(currentBlog);
 
   return (
@@ -88,7 +99,11 @@ const BlogPage = ({ title, subTitle, banner, content }: blogPageProps) => {
                 width={"100%"}
               />
             </Box>
-            <Text textAlign={"justify"}>{content?content:'Add Blog Content'}</Text>
+            {/* <MDEditor value={content} onChange={setfirst} preview="preview"/> */}
+            <Box w={["auto", "3xl"]}>
+              <MDPreview source={content} fullscreen={true} style={{ backgroundColor: '#ffffff', color: '#000000', padding:'10px' }}/>
+            </Box>
+            {/* <Text textAlign={"justify"}>{content?content:'Add Blog Content'}</Text> */}
           </VStack>
         </Box>
       </HStack>
