@@ -17,6 +17,9 @@ import remarkGfm from "remark-gfm";
 import Navbar from "../components/Navbar";
 import Preview from "../components/Preview";
 import BlogPage from "./blog/[id]";
+import storeFiles from "../utils/imageUpload";
+import uploadNewBlog from "../utils/uploadBlog";
+import { title } from "process";
 
 type Props = {};
 
@@ -25,7 +28,22 @@ const write = (props: Props) => {
   const [preview, setPreview] = useState<boolean>(false);
   const [title, setTitle] = useState<String | null>(null);
   const [subTitle, setSubTitle] = useState<String | null>(null);
+  const [authorName, setAuthorName] = useState<String | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  // const [uri, setUri] = useState<String | null>(null);
+
+  // const uploadFilecoin = async () => {
+  //   const cid = await storeFiles(image);
+  //   setUri(cid);
+  //   console.log(uri);
+  // }
+
+  const uploadBlog = async () => {
+    console.log('uploading file');
+    const upload = await uploadNewBlog(title, subTitle, authorName, markdown, image);
+    console.log(upload);
+    console.log('blog uploaded');
+  }
   // const [content, setContent] = useState<String | null>(null);
   return (
     // <Container w={'100%'}>
@@ -41,7 +59,7 @@ const write = (props: Props) => {
       </Text>
       <Flex w={52} justifyContent={"space-between"}>
         <Button minW={'91px'} onClick={() => setPreview((prev) => !prev)}>{preview?'Write':'Preview'}</Button>
-        <Button colorScheme={"blue"}>Publish</Button>
+        <Button colorScheme={"blue"} onClick={uploadBlog}>Publish</Button>
       </Flex>
     </HStack>
     {preview?(<BlogPage title={title} subTitle={subTitle} banner={image} content={markdown}/>): 
@@ -76,6 +94,20 @@ const write = (props: Props) => {
               onChange={(e)=>{
                 e.preventDefault();
                 setSubTitle(e.target.value)
+              }
+              }
+            />
+          </Box>
+          <Box w={"full"} marginBlock={4}>
+          <Input
+              htmlSize={4}
+              width="full"
+              value={authorName}
+              placeholder="Author"
+              size={"lg"} 
+              onChange={(e)=>{
+                e.preventDefault();
+                setAuthorName(e.target.value)
               }
               }
             />
