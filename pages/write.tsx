@@ -62,14 +62,14 @@ const write = (props: Props) => {
         <Button colorScheme={"blue"} onClick={uploadBlog}>Publish</Button>
       </Flex>
     </HStack>
-    {preview?(<BlogPage title={title} subTitle={subTitle} banner={image} content={markdown}/>): 
+    {preview?(<BlogPage title={title} subTitle={subTitle} banner={image} content={markdown} author={authorName}/> ): 
     <Container maxW={"container.md"}>
       <Flex
         justifyContent={"space-between"}
         alignItems={"center"}
         paddingBlock={8}
       >
-        <Stack w={"sm"}>
+        <Box w={"sm"}>
           <Box w={"full"} marginBlock={4}>
             <Input
               htmlSize={4}
@@ -112,7 +112,7 @@ const write = (props: Props) => {
               }
             />
           </Box>
-        </Stack>
+        </Box>
         <ImageUpload image={image} setImage={setImage}/>
       </Flex>
       <Divider height={"full"} borderBottomWidth={"3px"} />

@@ -33,6 +33,7 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
     >
       <Box
         maxW={["full", "3xl"]}
+        w={["full", "3xl"]}
         bg={useColorModeValue("white", "gray.800")}
         p={4}
         borderColor={"gray"}

@@ -34,7 +34,7 @@ type blogPageProps = {
   content: string;
 };
 
-const BlogPage = ({ title, subTitle, banner, content }: blogPageProps) => {
+const BlogPage = ({ title, subTitle, banner, content, author }: blogPageProps) => {
   const state = useStore();
   const router = useRouter();
   const path = router.pathname;
@@ -78,7 +78,7 @@ const BlogPage = ({ title, subTitle, banner, content }: blogPageProps) => {
                 outlineOffset={"2px"}
               />
               <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-                Umang Patel
+                {author?author:'Author Name'}
               </Text>
             </HStack>
             <Flex opacity={0.6}>
