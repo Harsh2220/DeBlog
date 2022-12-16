@@ -169,7 +169,9 @@ const BlogPage = ({ title, subTitle, banner, content }: blogPageProps) => {
               width={"100%"}
             />
           </Box>
-          <Text textAlign={"justify"}>{currentBlog.blogContent}</Text>
+          <Box w={["auto", "3xl"]}>
+              <MDPreview source={currentBlog.blogContent} fullscreen={true} style={{ backgroundColor: "transparent", color: useColorModeValue("black", "white"), padding:'10px' }}/>
+            </Box>
         </VStack>
       </Box>
     </HStack>

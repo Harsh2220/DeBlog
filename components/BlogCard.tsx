@@ -23,6 +23,7 @@ type BlogCardProps = {
 
 const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
   const router = useRouter();
+  console.log(image)
   return (
     <Box
       maxW={["full", "3xl"]}
