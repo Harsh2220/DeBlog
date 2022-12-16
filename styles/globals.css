@@ -14,6 +14,13 @@ a {
 * {
   box-sizing: border-box;
 }
+/* 
+.clampText {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+} */
 
 @media (prefers-color-scheme: dark) {
   html {

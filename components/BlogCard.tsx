@@ -35,19 +35,19 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
     >
       <Stack>
         <HStack border={"1px solid linear(to-r, green.200, pink.500)"}>
-          <Box w={'40px'}>
-          <Avatar
-            size={'full'}
-            name={author}
-            src="https://i.pravatar.cc/300"
-            mr={2}
-          />
+          <Box w={"40px"}>
+            <Avatar
+              size={"full"}
+              name={author}
+              src="https://i.pravatar.cc/300"
+              mr={2}
+            />
           </Box>
           <Stack lineHeight={0.8}>
-          <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-            {author}
-          </Text>
-          <Text ml={4}>Posted on Dec 6, 2022</Text>
+            <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
+              {author}
+            </Text>
+            <Text ml={4}>Posted on Dec 6, 2022</Text>
           </Stack>
         </HStack>
       </Stack>
@@ -62,13 +62,11 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
               {readingTime(content)} min read
             </Text>
           </Flex>
-          <Text opacity={0.8}>
-            One of the less exciting things about being a Frontend Developer is
-            having to handle error, empty and loading states. It may not be the
-            most fun thing to do, but it's necessary in order to give your u…
+          <Text opacity={0.8} noOfLines="3" maxW={"2xl"}>
+            {content}
           </Text>
         </Stack>
-        <Box w={["auto", "5xl"]} height={"48"} mt={[4, 0]}>
+        <Box height={"48"} maxW={["xs"]} minW={["xs"]} mt={[4, 0]}>
           <Image src={image} borderRadius={15} height={"100%"} width={"100%"} />
         </Box>
       </Flex>
