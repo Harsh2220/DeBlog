@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { AiOutlineHeart, AiOutlineRead } from "react-icons/ai";
 import useStore from "../../store/Store";
 import readingTime from "../../utils/getReadingTime";
@@ -101,7 +101,7 @@ const BlogPage = ({ title, subTitle, banner, content, author }: blogPageProps) =
             </Box>
             {/* <MDEditor value={content} onChange={setfirst} preview="preview"/> */}
             <Box w={["auto", "3xl"]}>
-              <MDPreview source={content} fullscreen={true} style={{ backgroundColor: '#ffffff', color: '#000000', padding:'10px' }}/>
+              <MDPreview source={content} fullscreen={true} style={{ backgroundColor: 'transparent', color: useColorModeValue("black", "white"), padding:'10px' }}/>
             </Box>
             {/* <Text textAlign={"justify"}>{content?content:'Add Blog Content'}</Text> */}
           </VStack>

@@ -27,9 +27,6 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
   return (
     <Box
       borderRadius={"sm"}
-      bgGradient="linear(to-l, #7928CA, #FF0080)"
-      p={"0.3%"}
-      m={2}
     >
       <Box
         maxW={["full", "3xl"]}
@@ -82,7 +79,7 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
               Read more
             </Text>
           </Stack>
-          <Box height={"48"} maxW={["xs"]} minW={["xs"]} mt={[4, 0]}>
+          <Box height={"36"} maxW={["xs"]} minW={[64]} mt={[4, 0]}>
             <Image
               src={image}
               borderRadius={15}

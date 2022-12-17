@@ -8,7 +8,9 @@ import {
   Textarea,
   HStack,
   Text,
+  IconButton,
   Button,
+  useColorMode
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -20,6 +22,10 @@ import BlogPage from "./blog/[id]";
 import storeFiles from "../utils/imageUpload";
 import uploadNewBlog from "../utils/uploadBlog";
 import { title } from "process";
+import { BiMoon } from "react-icons/bi";
+import { BsSun } from "react-icons/bs";
+
+
 
 type Props = {};
 
@@ -30,6 +36,7 @@ const write = (props: Props) => {
   const [subTitle, setSubTitle] = useState<String | null>(null);
   const [authorName, setAuthorName] = useState<String | null>(null);
   const [image, setImage] = useState<File | null>(null);
+  const { colorMode, toggleColorMode } = useColorMode();
   // const [uri, setUri] = useState<String | null>(null);
 
   // const uploadFilecoin = async () => {
@@ -57,9 +64,16 @@ const write = (props: Props) => {
       <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
         DeBlog
       </Text>
-      <Flex w={52} justifyContent={"space-between"}>
+      <Flex w={72} justifyContent={"space-between"}>
         <Button minW={'91px'} onClick={() => setPreview((prev) => !prev)}>{preview?'Write':'Preview'}</Button>
         <Button colorScheme={"blue"} onClick={uploadBlog}>Publish</Button>
+        <IconButton
+            onClick={toggleColorMode}
+            size="lg"
+            variant="ghost"
+            aria-label="open menu"
+            icon={colorMode === "light" ? <BiMoon /> : <BsSun />}
+          />
       </Flex>
     </HStack>
     {preview?(<BlogPage title={title} subTitle={subTitle} banner={image} content={markdown} author={authorName}/> ): 

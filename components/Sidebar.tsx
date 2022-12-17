@@ -92,7 +92,7 @@ export default function Sidebar({ blogs }) {
                   index={index}
                   content={blog.blogContent}
                 />
-                {/* <Divider /> */}
+                <Divider />
               </>
             );
           })
