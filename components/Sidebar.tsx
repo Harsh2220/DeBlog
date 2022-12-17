@@ -92,7 +92,7 @@ export default function Sidebar({ blogs }) {
                   index={index}
                   content={blog.blogContent}
                 />
-                <Divider />
+                {/* <Divider /> */}
               </>
             );
           })
@@ -134,7 +134,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       justifyContent="space-between"
       {...rest}
     >
-      <Box>
+      <Flex flexDirection={'column'} justifyContent={'space-between'} bgGradient={'linear(to-b, green.300, blue.500, purple.600)'} pr={0.5} h={'full'}>
+      <Box bg={useColorModeValue("white", "gray.900")} h={'3xl'}>
         <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
           <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
             DeBlog
@@ -150,25 +151,30 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           </NavItem>
         ))}
       </Box>
-      <Box p={4}>
+      <Box p={4} bg={useColorModeValue("white", "gray.900")}>
         {address?.length > 0 ? (
           <Box bg={useColorModeValue("white", "gray.700")} p={4}>
             <Box w={"full"}>{shortenAddress(address)}</Box>
             <Box w={"full"}>{formatBalance(balance)}</Box>
           </Box>
         ) : (
-          <Button
+          <Box bgGradient={'linear(to-r, green.300, blue.500, purple.600)'} p={0.5} borderRadius={'md'}>
+            <Button
+            bg={"gray.700"}
             onClick={async () => {
               const data = await connectWallet();
               setAddress(data?.address);
               setBalance(data?.balance);
             }}
             w="full"
+            color={"white"}
           >
             Connect Wallet
           </Button>
+            </Box>
         )}
       </Box>
+      </Flex>
     </Flex>
   );
 };

@@ -25,11 +25,13 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
   const router = useRouter();
   console.log(image)
   return (
-    <Box
-      borderRadius={"sm"}
+    <Box borderRadius={'lg'} bgGradient={'linear(to-r, green.300, blue.500, purple.600)'} p={0.5} marginBlock={4}>
+      <Box
+      
     >
       <Box
         maxW={["full", "3xl"]}
+        borderRadius={'lg'}
         w={["full", "3xl"]}
         bg={useColorModeValue("white", "gray.800")}
         p={4}
@@ -89,6 +91,7 @@ const BlogCard = ({ title, author, image, index, content }: BlogCardProps) => {
           </Box>
         </Flex>
       </Box>
+    </Box>
     </Box>
   );
 };

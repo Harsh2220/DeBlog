@@ -32,14 +32,15 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
     const { colorMode, toggleColorMode } = useColorMode();
   
     return (
-      <Flex
+      <Box bgGradient={'linear(to-r, green.300, blue.500, purple.600)'} pb={0.5}>
+        <Flex
         ml={{ base: 0, md: 60 }}
         px={{ base: 4, md: 4 }}
         height="20"
         alignItems="center"
         bg={useColorModeValue("white", "gray.900")}
-        borderBottomWidth="1px"
-        borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+        // borderBottomWidth="1px"
+        // borderBottomColor={useColorModeValue("gray.200", "gray.700")}
         justifyContent={{ base: "space-between", md: "flex-end" }}
         pos={"sticky"}
         top={0}
@@ -114,5 +115,6 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
           />
         </HStack>
       </Flex>
+      </Box>
     );
   };
