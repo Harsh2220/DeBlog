@@ -1,7 +1,8 @@
 import { Avatar, Box, Flex, HStack, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiOutlineRead } from 'react-icons/ai';
 import readingTime from '../utils/getReadingTime';
+import optInUser from '../utils/optInUser';
 
 type Props = {
   title:any,
@@ -10,6 +11,9 @@ type Props = {
 
 const Notification = ({title,author, ...rest}: Props) => {
   console.log('fvf',author);
+  useEffect(()=>{
+    optInUser();
+  },[]);
   
   return (
 <Box
