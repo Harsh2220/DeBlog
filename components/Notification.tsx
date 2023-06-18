@@ -1,30 +1,54 @@
-import { Avatar, Box, Flex, HStack, Image, Stack, Text, useColorModeValue } from '@chakra-ui/react';
-import React from 'react'
-import { AiOutlineRead } from 'react-icons/ai';
-import readingTime from '../utils/getReadingTime';
+import { Box, HStack, Stack, Text, useColorModeValue } from "@chakra-ui/react";
+import React from "react";
 
-type Props = {
-  title:any,
-  author:any,
-}
+type Props = {};
 
-const Notification = ({title,author, ...rest}: Props) => {
-  console.log('fvf',author);
-  
+const Notification = (props: Props) => {
   return (
-<Box
+    <Box
       borderRadius={"lg"}
-      bgGradient={"linear(to-r, green.300, blue.500, purple.600)"}
+      bgColor={"linear(to-r, green.300, blue.500, purple.600)"}
       p={0.5}
       marginBlock={4}
     >
       <Box>
-        <Text fontSize={"xs"} fontWeight={700}>
-
-        </Text>
+        <Box
+          maxW={["full", "3xl"]}
+          borderRadius={"lg"}
+          w={["full", "3xl"]}
+          bg={useColorModeValue("white", "gray.800")}
+          p={4}
+          borderColor={"gray"}
+        >
+          <Stack>
+              <HStack flex={1} flexDirection={"row"}>
+                <Text
+                  fontSize={"lg"}
+                  fontWeight={700}
+                  color={["black", "white"]}
+                >
+                  Sahillll
+                </Text>
+                <Text
+                  fontSize={"lg"}
+                  fontWeight={500}
+                  color={["black", "white"]}
+                >
+                  uploaded a new blog onnnnnn
+                </Text>
+                <Text
+                  fontSize={"lg"}
+                  fontWeight={700}
+                  color={["black", "white"]}
+                >
+                  creator economy.
+                </Text>
+              </HStack>
+          </Stack>
+        </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 
-export default Notification
+export default Notification;

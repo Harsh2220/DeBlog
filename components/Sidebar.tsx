@@ -19,6 +19,7 @@ import {
   InputRightElement,
   Button,
   Divider,
+  color,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -49,7 +50,7 @@ import Notification from "./notification";
 interface LinkItemProps {
   name: string;
   icon: IconType;
-  onClick:()=>void;
+  onClick: () => void;
 }
 
 export default function Sidebar({ blogs }) {
@@ -96,6 +97,7 @@ export default function Sidebar({ blogs }) {
               })
             ) : (
               <>
+                {/* <Notification /> */}
                 <BlogSkleton />
                 <BlogSkleton />
                 <BlogSkleton />
@@ -108,9 +110,10 @@ export default function Sidebar({ blogs }) {
             )}
           </Box>
         ) : (
-          <Notification />
+          <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
+            <Notification />
+          </Box>
         )}
-
         <Trending />
       </Flex>
     </Box>
@@ -124,11 +127,19 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { setNotification } = useStore();
   const LinkItems: Array<LinkItemProps> = [
-    { name: "Home", icon: FiHome,onClick:()=>setNotification(false) },
-    { name: "Trending", icon: FiTrendingUp,onClick:()=>setNotification(false) },
-    { name: "Explore", icon: FiCompass,onClick:()=>setNotification(false) },
-    { name: "Favourites", icon: FiStar,onClick:()=>setNotification(false) },
-    { name: "Settings", icon: FiSettings,onClick:()=>setNotification(false) },
+    { name: "Home", icon: FiHome, onClick: () => setNotification(false) },
+    {
+      name: "Trending",
+      icon: FiTrendingUp,
+      onClick: () => setNotification(false),
+    },
+    { name: "Explore", icon: FiCompass, onClick: () => setNotification(false) },
+    { name: "Favourites", icon: FiStar, onClick: () => setNotification(false) },
+    {
+      name: "Settings",
+      icon: FiSettings,
+      onClick: () => setNotification(false),
+    },
   ];
   const [address, setAddress] = useState<string | undefined>("");
   const [balance, setBalance] = useState<number | undefined>(0);
@@ -167,7 +178,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             />
           </Flex>
           {LinkItems.map((link) => (
-            <NavItem key={link.name} icon={link.icon} onClick={link.onClick} >
+            <NavItem
+              key={link.name}
+              icon={link.icon}
+              onClick={link.onClick}
+              _hover={{ bg: "#4c4c4c" }}
+            >
               {link.name}
             </NavItem>
           ))}
