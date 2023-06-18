@@ -22,6 +22,7 @@ import { BsSun } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
 import {HiPencilAlt} from "react-icons/hi"
 import { useRouter } from "next/router";
+import useStore from "../store/Store";
 
 interface MobileProps extends FlexProps {
     onOpen: () => void;
@@ -30,6 +31,7 @@ interface MobileProps extends FlexProps {
 export default function Navbar({ onOpen, ...rest }: MobileProps) {
     const router = useRouter();
     const { colorMode, toggleColorMode } = useColorMode();
+    const {setNotification}=useStore();
   
     return (
       <Box bgGradient={'linear(to-r, green.300, blue.500, purple.600)'} pb={0.5}>
@@ -100,6 +102,7 @@ export default function Navbar({ onOpen, ...rest }: MobileProps) {
             display={["flex", "flex", "none"]}
           />
           <IconButton
+            onClick={()=>setNotification(true)}
             size="lg"
             variant="ghost"
             aria-label="open menu"

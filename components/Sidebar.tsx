@@ -34,7 +34,7 @@ import { ReactText } from "react";
 import { BiMoon } from "react-icons/bi";
 import { BsSun } from "react-icons/bs";
 import { BiSearch } from "react-icons/bi";
-import { HiPencilAlt } from "react-icons/hi"
+import { HiPencilAlt } from "react-icons/hi";
 import connectWallet from "../utils/connectWallet";
 import BlogCard from "./BlogCard";
 import BlogSkleton from "./BlogSkleton";
@@ -43,21 +43,18 @@ import formatBalance from "../utils/formatBalance";
 import { useRouter } from "next/router";
 import Navbar from "./Navbar";
 import Trending from "./Trending";
+import useStore from "../store/Store";
+import Notification from "./notification";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  onClick:()=>void;
 }
-const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
-  { name: "Trending", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
-  { name: "Settings", icon: FiSettings },
-];
 
 export default function Sidebar({ blogs }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { notifications } = useStore();
   return (
     <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
@@ -79,37 +76,42 @@ export default function Sidebar({ blogs }) {
       </Drawer>
       <Navbar />
       <Flex>
-      <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
-        {blogs ? (
-          blogs.map((blog, index) => {
-            return (
+        {!notifications ? (
+          <Box ml={{ base: 0, md: 60 }} p={[0, null, 4]} w="fit-content">
+            {blogs ? (
+              blogs.map((blog, index) => {
+                return (
+                  <>
+                    <BlogCard
+                      key={index}
+                      author={blog.author}
+                      title={blog.title}
+                      image={blog.cover}
+                      index={index}
+                      content={blog.metadata}
+                    />
+                    {/* <Divider /> */}
+                  </>
+                );
+              })
+            ) : (
               <>
-                <BlogCard
-                  key={index}
-                  author={blog.author}
-                  title={blog.title}
-                  image={blog.cover}
-                  index={index}
-                  content={blog.metadata}
-                />
-                {/* <Divider /> */}
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
+                <BlogSkleton />
               </>
-            );
-          })
+            )}
+          </Box>
         ) : (
-          <>
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-            <BlogSkleton />
-          </>
+          <Notification />
         )}
-      </Box>
-      <Trending />
+
+        <Trending />
       </Flex>
     </Box>
   );
@@ -120,6 +122,14 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { setNotification } = useStore();
+  const LinkItems: Array<LinkItemProps> = [
+    { name: "Home", icon: FiHome,onClick:()=>setNotification(false) },
+    { name: "Trending", icon: FiTrendingUp,onClick:()=>setNotification(false) },
+    { name: "Explore", icon: FiCompass,onClick:()=>setNotification(false) },
+    { name: "Favourites", icon: FiStar,onClick:()=>setNotification(false) },
+    { name: "Settings", icon: FiSettings,onClick:()=>setNotification(false) },
+  ];
   const [address, setAddress] = useState<string | undefined>("");
   const [balance, setBalance] = useState<number | undefined>(0);
   return (
@@ -134,46 +144,61 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       justifyContent="space-between"
       {...rest}
     >
-      <Flex flexDirection={'column'} justifyContent={'space-between'} bgGradient={'linear(to-b, green.300, blue.500, purple.600)'} pr={0.5} h={'full'}>
-      <Box bg={useColorModeValue("white", "gray.900")} h={'3xl'}>
-        <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-          <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-            DeBlog
-          </Text>
-          <CloseButton
-            display={{ base: "flex", md: "none" }}
-            onClick={onClose}
-          />
-        </Flex>
-        {LinkItems.map((link) => (
-          <NavItem key={link.name} icon={link.icon}>
-            {link.name}
-          </NavItem>
-        ))}
-      </Box>
-      <Box p={4} bg={useColorModeValue("white", "gray.900")}>
-        {address?.length > 0 ? (
-          <Box bg={useColorModeValue("white", "gray.700")} p={4}>
-            <Box w={"full"}>{shortenAddress(address)}</Box>
-            <Box w={"full"}>{formatBalance(balance)}</Box>
-          </Box>
-        ) : (
-          <Box bgGradient={'linear(to-r, green.300, blue.500, purple.600)'} p={0.5} borderRadius={'md'}>
-            <Button
-            bg={"gray.700"}
-            onClick={async () => {
-              const data = await connectWallet();
-              setAddress(data?.address);
-              setBalance(data?.balance);
-            }}
-            w="full"
-            color={"white"}
+      <Flex
+        flexDirection={"column"}
+        justifyContent={"space-between"}
+        bgGradient={"linear(to-b, green.300, blue.500, purple.600)"}
+        pr={0.5}
+        h={"full"}
+      >
+        <Box bg={useColorModeValue("white", "gray.900")} h={"3xl"}>
+          <Flex
+            h="20"
+            alignItems="center"
+            mx="8"
+            justifyContent="space-between"
           >
-            Connect Wallet
-          </Button>
+            <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+              DeBlog
+            </Text>
+            <CloseButton
+              display={{ base: "flex", md: "none" }}
+              onClick={onClose}
+            />
+          </Flex>
+          {LinkItems.map((link) => (
+            <NavItem key={link.name} icon={link.icon} onClick={link.onClick} >
+              {link.name}
+            </NavItem>
+          ))}
+        </Box>
+        <Box p={4} bg={useColorModeValue("white", "gray.900")}>
+          {address?.length > 0 ? (
+            <Box bg={useColorModeValue("white", "gray.700")} p={4}>
+              <Box w={"full"}>{shortenAddress(address)}</Box>
+              <Box w={"full"}>{formatBalance(balance)}</Box>
             </Box>
-        )}
-      </Box>
+          ) : (
+            <Box
+              bgGradient={"linear(to-r, green.300, blue.500, purple.600)"}
+              p={0.5}
+              borderRadius={"md"}
+            >
+              <Button
+                bg={"gray.700"}
+                onClick={async () => {
+                  const data = await connectWallet();
+                  setAddress(data?.address);
+                  setBalance(data?.balance);
+                }}
+                w="full"
+                color={"white"}
+              >
+                Connect Wallet
+              </Button>
+            </Box>
+          )}
+        </Box>
       </Flex>
     </Flex>
   );
@@ -203,19 +228,9 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         }}
         {...rest}
       >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            as={icon}
-          />
-        )}
+        {icon && <Icon mr="4" fontSize="16" as={icon} />}
         {children}
       </Flex>
     </Link>
   );
 };
-
-
-
-
