@@ -86,11 +86,11 @@ export default function Sidebar({ blogs }) {
               <>
                 <BlogCard
                   key={index}
-                  author={blog.authorName}
-                  title={blog.blogTitle}
-                  image={blog.coverImage}
+                  author={blog.author}
+                  title={blog.title}
+                  image={blog.cover}
                   index={index}
-                  content={blog.blogContent}
+                  content={blog.metadata}
                 />
                 {/* <Divider /> */}
               </>

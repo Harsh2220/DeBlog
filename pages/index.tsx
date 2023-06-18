@@ -4,7 +4,7 @@ import Sidebar from "../components/Sidebar";
 import { ethers } from "ethers";
 import { ABI } from "../constants";
 import useStore from "../store/Store";
-import CONTRACT_ADDRESS from "../constants"
+import CONTRACT_ADDRESS from "../constants";
 const Home: NextPage = () => {
   const state = useStore();
   const setBlogs = state.setBlogs;
@@ -13,21 +13,21 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     getAllBlogs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [detailBlogs]);
 
   const getAllBlogs = async () => {
     try {
-      const { ethereum } : any = window;
+      const { ethereum }: any = window;
       if (!detailBlogs) {
         if (ethereum) {
           const provider = new ethers.providers.Web3Provider(ethereum, "any");
           const signer = provider.getSigner();
           const DeBlog = new ethers.Contract(CONTRACT_ADDRESS, ABI, signer);
-          const AllBlogs = await DeBlog.getAllblogs();
-          console.log(AllBlogs);
+          const AllBlogs = await DeBlog.getAllBlogs();
+          console.log(AllBlogs)
           setBlogs(AllBlogs);
           setDetailBlogs(AllBlogs);
-          console.log(blogs);
         }
       }
     } catch (error) {

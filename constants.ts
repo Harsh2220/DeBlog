@@ -1,174 +1,114 @@
-const CONTRACT_ADDRESS = "0x34562d05e89c86A17f1C5a9926088Fa97E0F7F84";
+const CONTRACT_ADDRESS = "0xcA901bD6379bf0389d1E9Eb81288948FD1344eb8";
 
-const IPFS_GATEWAY = "https://ipfs.io/ipfs"
+const IPFS_GATEWAY = "https://ipfs.io/ipfs";
 
 const ABI = [
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "blogId",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "address",
-                "name": "owner",
-                "type": "address"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "blogTitle",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "subTitle",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "authorName",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "blogContent",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "uint256",
-                "name": "blogUploaded",
-                "type": "uint256"
-            },
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "coverImage",
-                "type": "string"
-            }
+  {
+    inputs: [
+      {
+        internalType: "string",
+        name: "_title",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_metadata",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_cover",
+        type: "string",
+      },
+    ],
+    name: "createBlog",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_blogImplementation",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "constructor",
+  },
+  {
+    inputs: [],
+    name: "blogImplementation",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
+      },
+    ],
+    name: "blogsLibrary",
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAllBlogs",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "author",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "title",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "metadata",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "cover",
+            type: "string",
+          },
+          {
+            internalType: "uint256",
+            name: "timestamp",
+            type: "uint256",
+          },
         ],
-        "name": "BlogAdded",
-        "type": "event"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "blogId_",
-                "type": "uint256"
-            },
-            {
-                "internalType": "string",
-                "name": "blogTitle_",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "subTitle_",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "authorName_",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "blogContent_",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "coverImage_",
-                "type": "string"
-            }
-        ],
-        "name": "newBlog",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address payable",
-                "name": "blogOwner_",
-                "type": "address"
-            }
-        ],
-        "name": "tipToOwner",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "name": "getAllblogs",
-        "outputs": [
-            {
-                "components": [
-                    {
-                        "internalType": "uint256",
-                        "name": "blogId",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "address",
-                        "name": "blogOwner",
-                        "type": "address"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "blogTitle",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "subTitle",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "authorName",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "blogContent",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "timestamp",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "coverImage",
-                        "type": "string"
-                    }
-                ],
-                "internalType": "struct DeBlog.Blog[]",
-                "name": "",
-                "type": "tuple[]"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    }
-]
-export default CONTRACT_ADDRESS
-export { ABI, IPFS_GATEWAY }
+        internalType: "struct BlogFactory.Post[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+];
+export default CONTRACT_ADDRESS;
+export { ABI, IPFS_GATEWAY };

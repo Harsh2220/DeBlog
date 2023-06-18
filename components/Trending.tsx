@@ -34,7 +34,7 @@ const Trending = (props: Props) => {
               <Text fontSize={"lg"} fontWeight={700}>
                 Umang Patel
               </Text>
-              <Text>No-One</Text>
+              <Text>Exploring and building</Text>
             </Stack>
           </Flex>
         </Box>
@@ -50,7 +50,7 @@ const Trending = (props: Props) => {
               <Text fontSize={"lg"} fontWeight={700}>
                 Harsh Sachaniya
               </Text>
-              <Text>DevRel @GraphProtocol</Text>
+              <Text>Full Stack Web3.0 dev</Text>
             </Stack>
           </Flex>
         </Box>
@@ -66,7 +66,7 @@ const Trending = (props: Props) => {
               <Text fontSize={"lg"} fontWeight={700}>
                 Vivek Suthar
               </Text>
-              <Text>Founder and cheif, LensPlay</Text>
+              <Text>Building DeBlog</Text>
             </Stack>
           </Flex>
         </Box>
