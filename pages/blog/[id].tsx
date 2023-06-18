@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { use, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { AiOutlineHeart, AiOutlineRead } from "react-icons/ai";
 import useStore from "../../store/Store";
 import readingTime from "../../utils/getReadingTime";
@@ -47,7 +47,15 @@ const BlogPage = ({
   const { id } = router.query;
   const currentBlog = blogs[id];
   const [first, setfirst] = useState("");
-  const [metadata, setMetadata] = useState("");
+  const [metadata, setMetadata] = useState(null);
+  useEffect(() => {
+    console.log(currentBlog.metadata)
+    fetch(`https://w3s.link/ipfs/${currentBlog.metadata}`).then(res => res.json()).then((res) => {
+      setMetadata(res)
+      console.log(res)
+    })
+  },[])
+
 
   return path == "/write" ? (
     <HStack
@@ -152,7 +160,7 @@ const BlogPage = ({
                 outlineOffset={"2px"}
               />
               <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-                {currentBlog.authorName}
+                {metadata?.author}
               </Text>
             </HStack>
             <Flex opacity={0.6}>
@@ -165,18 +173,18 @@ const BlogPage = ({
               <Flex alignItems={"center"}>
                 <AiOutlineRead />{" "}
                 <Text lineHeight={0.8} ml={4} fontWeight={"500"}>
-                  {readingTime(currentBlog.blogContent)} min read
+                  {readingTime(metadata?.content)} min read
                 </Text>
               </Flex>
             </Stack>
           </Flex>
           <VStack>
             <Text fontSize={"4xl"} fontWeight={700}>
-              {currentBlog.blogTitle}
+              {currentBlog?.blogTitle}
             </Text>
             <Box w={["auto", "3xl"]} height={"sm"}>
               <Image
-                src={currentBlog.coverImage}
+                src={metadata?.cover}
                 borderRadius={10}
                 p={"2"}
                 height={"100%"}
@@ -185,7 +193,7 @@ const BlogPage = ({
             </Box>
             <Box w={["auto", "3xl"]}>
               <MDPreview
-                source={currentBlog.blogContent}
+                source={metadata?.content}
                 fullscreen={true}
                 style={{
                   backgroundColor: "transparent",
@@ -218,7 +226,7 @@ const BlogPage = ({
             outlineOffset={"2px"}
           />
           <Text fontSize={"lg"} fontWeight={700} lineHeight={"0.8"}>
-            {currentBlog.authorName}
+            {metadata?.author}
           </Text>
         </HStack>
         <Button bg={"blue.300"}>
